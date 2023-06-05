@@ -13,6 +13,10 @@ module "igw" {
   source        = "./modules/networking/igw"
   vpc_id        = module.vpc.vpc_id
   project_name  = module.vpc.project_name
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 # create subnets
@@ -24,6 +28,10 @@ module "subnets" {
   private_app_subnets = var.private_app_subnets
   private_data_subnets = var.private_data_subnets
   zone_id = var.zone_id
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 # # create a route table
